@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Travels</title>
+</head>
+<body>
+<h2>Hello, {{ user.first_name }}</h2>
+
+	<table><h3>Your Trip Schedule:</h3>
+		<tr>
+			<th>Destination --- </th>
+			<th>Travel Start Date --- </th>
+			<th>Travel End Date --- </th>
+			<th>Plan</th>
+		</tr>
+		
+		{% for trip in trips %}
+		{% if user == trip.user %}
+		<tr>
+			<td><a href="/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
+			<td>{{ trip.start_date }}</td>
+			<td>{{ trip.end_date }}</td>
+			<td>{{ trip.plan }}</td>
+			<td><form action='/delete/{{ trip.id }}'>
+	<input type="submit" name="delete" value='delete'></form></td>
+
+
+		</tr>
+		{% endif %}
+		{% endfor %}
+		
+	</table>
+<hr>
+	<table> <H3>Other user's travel plans</H3>
+		<tr>
+			<th>Name --- </th>
+			<th>Destination --- </th>
+			<th>Travel Start Date --- </th>
+			<th>Travel End Date --- </th>
+			<th>Do you want to join?</th>
+		</tr>
+		{% for trip in trips %}
+		{% if user != trip.user %}
+		<tr>
+			<td>{{ trip.user.first_name }} {{ trip.user.last_name }}</td>
+			<td><a href="/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
+			<td>{{ trip.start_date }}</td>
+			<td>{{ trip.end_date }}</td>
+			<td><a href="/joinTrip/{{ trip.id }}">Join</a></td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+
+	</table>
+	<p><a href="/addTrip">Add a new Trip!</a></p>
+	<a href="/logout">Logout</a>
+</body>
+</html>

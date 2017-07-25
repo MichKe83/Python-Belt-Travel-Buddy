@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Travel Plan</title>
+</head>
+<body>
+<h1>Add a new trip, {{ user.first_name }}!!!</h1>
+	<form action="/submitTrip" method='POST'>
+		{% csrf_token %}
+		<p>Destination: <input type="text" name="destination"></p>
+		<p>Description/Plan: <input type="text" name="description"></p>
+		<p>Travel Date From: <input type="date" name="from"></p>
+		<p>Travel Date End: <input type="date" name="end"></p>
+		<input type="submit" name="submit" value='Add Trip!'>
+
+
+	</form>
+
+
+
+</body>
+</html>
